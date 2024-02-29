@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<by.bashlikovvv.tms_an_16_homework_lesson_31.CustomBannerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bannerContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    app:bl_title="Test title"
+    app:bl_subtitle="Test sub title"
+    app:bl_first_button_text="First button"
+    app:bl_second_button_text="Second button"
+    app:bl_icon="@drawable/icon">
+
+    <Button
+        android:id="@+id/bannerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="show/hide banner"
+        tools:ignore="HardcodedText" />
+
+</by.bashlikovvv.tms_an_16_homework_lesson_31.CustomBannerLayout>

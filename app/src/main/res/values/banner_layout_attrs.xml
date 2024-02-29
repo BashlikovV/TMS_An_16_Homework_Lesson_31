@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomBannerLayout">
+
+        <attr name="bl_background" format="reference"/>
+        <attr name="bl_padding" format="integer"/>
+        <attr name="bl_icon" format="reference"/>
+        <attr name="bl_title" format="string"/>
+        <attr name="bl_subtitle" format="string"/>
+        <attr name="bl_first_button_text" format="string"/>
+        <attr name="bl_second_button_text" format="string"/>
+
+    </declare-styleable>
+</resources>
