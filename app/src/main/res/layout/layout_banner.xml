@@ -4,30 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    app:layoutDescription="@xml/layout_banner_motion_scene"
-    tools:applyMotionScene="false"
+    app:layoutDescription="@xml/layout_banner_motion_scene_tb"
+    app:applyMotionScene="false"
     android:background="@color/black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bannerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="15dp"
         android:background="@drawable/layout_banner_background"
         android:padding="5dp"
         android:visibility="gone"
         tools:visibility="visible">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/bannerLayoutIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:importantForAccessibility="no"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
             android:visibility="gone"/>
 
         <TextView
@@ -45,8 +44,8 @@
             android:id="@+id/bannerLayoutSubTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bannerLayoutIcon"
+            app:layout_constraintStart_toStartOf="@id/bannerLayoutTitle"
+            app:layout_constraintTop_toBottomOf="@id/bannerLayoutTitle"
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:textAppearance="@style/layout_banner_subtitle_text_appearance"
@@ -59,6 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bannerLayoutSubTitle"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:gravity="end">
 

@@ -1,10 +1,15 @@
 package by.bashlikovvv.tms_an_16_homework_lesson_31
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.animation.LinearInterpolator
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.constraintlayout.motion.widget.MotionLayout
 import by.bashlikovvv.tms_an_16_homework_lesson_31.databinding.LayoutBannerBinding
+import kotlin.properties.Delegates
 
 class CustomBannerLayout : MotionLayout {
 
@@ -17,6 +22,9 @@ class CustomBannerLayout : MotionLayout {
         setUpCustomAttrs(attrs)
     }
 
+    private var _state: BannerLayoutState by Delegates.observable(BannerLayoutState.Info()) { _, _, _ ->
+        setState(true)
+    }
 
     private val binding: LayoutBannerBinding = LayoutBannerBinding.inflate(
         LayoutInflater.from(context),
@@ -60,6 +68,42 @@ class CustomBannerLayout : MotionLayout {
         this.clickListeners = newListeners
     }
 
+    fun setState(state: BannerLayoutState) {
+        _state = state
+    }
+
+    private fun setState(hideButtons: Boolean) {
+        _state.let {
+            with(binding) {
+                bannerLayout.setBackgroundResource(it.background)
+                bannerLayoutIcon.setImageResource(it.icon)
+                bannerLayoutIcon.visibility = VISIBLE
+                val color = resources.getColor(it.textColor, resources.newTheme())
+                bannerLayoutTitle.setTextColor(color)
+                bannerLayoutSubTitle.setTextColor(color)
+                bannerLayoutIcon.setColorFilter(color)
+                if (hideButtons) {
+                    ValueAnimator.ofFloat(500f, 0f).apply {
+                        addUpdateListener {
+                            val alpha = linearInterpolation(it.animatedFraction, 1f, 0f)
+                            binding.bannerLayoutFirstButton.alpha = alpha
+                            binding.bannerLayoutSecondButton.alpha = alpha
+                            if (alpha == 0f) {
+                                binding.bannerLayoutFirstButton.visibility = GONE
+                                binding.bannerLayoutSecondButton.visibility = GONE
+                            }
+                        }
+                        interpolator = LinearInterpolator()
+                        duration = 300
+                        start()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun linearInterpolation(t: Float, a: Float, b: Float) = (1 - t) * a + t * b
+
     private fun setUpCustomAttrs(attrs: AttributeSet) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomBannerLayout)
         val background = typedArray.getResourceId(R.styleable.CustomBannerLayout_bl_background, R.drawable.layout_banner_background)
@@ -70,6 +114,7 @@ class CustomBannerLayout : MotionLayout {
         val firstText = typedArray.getString(R.styleable.CustomBannerLayout_bl_first_button_text)
         val secondText = typedArray.getString(R.styleable.CustomBannerLayout_bl_second_button_text)
 
+        setState(false)
         with(binding) {
             bannerLayout.setBackgroundResource(background)
             bannerLayout.setPadding(padding, padding, padding, padding)
@@ -86,7 +131,12 @@ class CustomBannerLayout : MotionLayout {
             } else {
                 bannerLayoutSubTitle.visibility = GONE
             }
-            binding.bannerLayoutSecondButton.text = secondText
+            if (secondText != null) {
+                binding.bannerLayoutSecondButton.text = secondText
+                binding.bannerLayoutSecondButton.visibility = VISIBLE
+            } else {
+                binding.bannerLayoutSecondButton.visibility = GONE
+            }
             if (firstText != null) {
                 binding.bannerLayoutFirstButton.text = firstText
                 binding.bannerLayoutFirstButton.visibility = VISIBLE
@@ -107,6 +157,38 @@ class CustomBannerLayout : MotionLayout {
         fun notifyFirstButtonClicked()
 
         fun notifySecondButtonClicked()
+
+    }
+
+    sealed class BannerLayoutState(
+        @DrawableRes val icon: Int,
+        @DrawableRes val background: Int,
+        @ColorRes val textColor: Int
+    ) {
+
+        class Info : BannerLayoutState(
+            icon = R.drawable.info,
+            background = R.drawable.layout_banner_background_info,
+            textColor = R.color.info
+        )
+
+        class Warning : BannerLayoutState(
+            icon = R.drawable.warning,
+            background = R.drawable.layout_banner_background_warning,
+            textColor = R.color.warning
+        )
+
+        class Error : BannerLayoutState(
+            icon = R.drawable.error,
+            background = R.drawable.layout_banner_background_error,
+            textColor = R.color.error
+        )
+
+        class Success : BannerLayoutState(
+            icon = R.drawable.success,
+            background = R.drawable.layout_banner_background_success,
+            textColor = R.color.success
+        )
 
     }
 

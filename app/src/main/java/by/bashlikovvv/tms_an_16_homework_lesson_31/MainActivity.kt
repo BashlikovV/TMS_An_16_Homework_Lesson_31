@@ -18,6 +18,18 @@ class MainActivity : AppCompatActivity() {
                 binding.bannerContainer.showBanner()
             }
         }
+        binding.errorButton.setOnClickListener {
+            binding.bannerContainer.setState(CustomBannerLayout.BannerLayoutState.Error())
+        }
+        binding.infoButton.setOnClickListener {
+            binding.bannerContainer.setState(CustomBannerLayout.BannerLayoutState.Info())
+        }
+        binding.successButton.setOnClickListener {
+            binding.bannerContainer.setState(CustomBannerLayout.BannerLayoutState.Success())
+        }
+        binding.warningButton.setOnClickListener {
+            binding.bannerContainer.setState(CustomBannerLayout.BannerLayoutState.Warning())
+        }
         binding.bannerContainer.setClickListeners(object : CustomBannerLayout.OnCLikListeners {
             override fun notifyFirstButtonClicked() {
                 Toast
