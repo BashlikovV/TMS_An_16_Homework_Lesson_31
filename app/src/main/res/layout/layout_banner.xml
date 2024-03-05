@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:layoutDescription="@xml/layout_banner_motion_scene_tb"
-    app:applyMotionScene="false"
-    android:background="@color/black">
+    android:background="@color/black"
+    tools:applyMotionScene="false"
+    app:layoutDescription="@xml/layout_banner_motion_scene">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bannerLayout"
@@ -16,67 +16,70 @@
         android:background="@drawable/layout_banner_background"
         android:padding="5dp"
         android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/bannerLayoutIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:importantForAccessibility="no"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:visibility="gone"/>
+            android:importantForAccessibility="no"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/bannerLayoutTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/bannerLayoutIcon"
             android:layout_marginStart="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:textAppearance="@style/layout_banner_title_text_appearance"
-            tools:text="Title example"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bannerLayoutIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title example" />
 
         <TextView
             android:id="@+id/bannerLayoutSubTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textAppearance="@style/layout_banner_subtitle_text_appearance"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/bannerLayoutTitle"
             app:layout_constraintTop_toBottomOf="@id/bannerLayoutTitle"
-            android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textAppearance="@style/layout_banner_subtitle_text_appearance"
             tools:text="SubTitle example" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bannerLayoutSubTitle"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="10dp"
+            android:gravity="end"
             android:orientation="horizontal"
-            android:gravity="end">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bannerLayoutSubTitle">
 
             <Button
                 android:id="@+id/bannerLayoutFirstButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/layout_banner_first_button_text_appearance"
-                tools:text="First button"
-                style="?android:attr/buttonBarButtonStyle" />
+                tools:text="First button" />
 
             <Button
                 android:id="@+id/bannerLayoutSecondButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/layout_banner_second_button_text_appearance"
-                tools:text="Second button"
-                style="?android:attr/buttonBarButtonStyle" />
+                tools:text="Second button" />
 
         </LinearLayout>
 
